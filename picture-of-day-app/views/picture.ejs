@@ -1,1 +1,32 @@
 <!--Filename: views/picture.ejs-->
+<!--Filename: views/picture.ejs-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise-Powered Cats</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🐱 Promise-Powered Cats 🐱</h1>
+   
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } else { %>
+      <div class="greeting"><%= greeting %></div>
+      <img src="<%= catUrl %>" alt="Random cat" class="cat-image">
+      <div class="fact"> Did you know? <%= fact %></div>
+    <% } %>
+
+
+    <form action="/" method="GET">
+      <button type="submit">Get Another Cat!</button>
+    </form>
+  </div>
+
+
+  <script src="/picture-of-day-app/views/Script/app.js"></script>
+</body>
+</html>
