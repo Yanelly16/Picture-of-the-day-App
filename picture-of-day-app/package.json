@@ -1,0 +1,20 @@
+{
+  "name": "picture-of-day-app",
+  "version": "1.0.0",
+  "description": "Picture of the day app",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wendy Alfaro",
+  "license": "ISC",
+  "devDependencies": {
+    "ejs": "^3.1.10",
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
