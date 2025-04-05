@@ -1,12 +1,8 @@
 //Filename: routes/pictureRoutes.js
 
-
 import express from "express";
-import axios from "axios";
-
 
 const router = express.Router();
-
 
 // Hardcoded Data
 const greetings = [
@@ -23,7 +19,6 @@ const greetings = [
     "You've cat to be kitten me!"
 ];
 
-
 const catFacts = [
    "Cats can rotate their ears 180 degrees",
    "A cat's nose print is unique like a fingerprint",
@@ -38,35 +33,25 @@ const catFacts = [
     "Cats walk like camels and giraffes - they move both right feet first, then both left feet."
 ];
 
-
-
-
-
-
-router.get('/', async (req, res) => {
-  try {
-    const response = await axios.get('https://api.thecatapi.com/v1/images/search');
-    res.render('picture', {
-      greeting: greetings[Math.floor(Math.random() * greetings.length)],
-      catUrl: response.data[0].url,
-      fact: catFacts[Math.floor(Math.random() * catFacts.length)],
-      error: null // Explicitly set error to null when successful
-    });
-  } catch (error) {
-    res.render('picture', {
-      error: "😿 Failed to load cat picture",
-      greeting: null,
-      catUrl: null,
-      fact: null
-    });
-  }
+router.get('/', (req, res) => {
+    fetch('https://api.thecatapi.com/v1/images/search')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch cat picture");
+            }
+            return response.json();
+        })
+        .then(data => {
+            res.render('picture', {
+                greeting: greetings[Math.floor(Math.random() * greetings.length)],
+                catUrl: data[0].url,
+                fact: catFacts[Math.floor(Math.random() * catFacts.length)],
+                error: null
+            });
+        })
+        .catch(error => {
+            res.render('picture', { error: "😿 Failed to load cat picture" });
+        });
 });
-
-
-
-
-
-
-
 
 export default router;
